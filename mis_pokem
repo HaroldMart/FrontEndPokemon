@@ -1,0 +1,29 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include('libreria/principal.php');
+
+plantilla::aplicar('Eventos');
+
+$usuario = obtenerUsuario(true);
+
+// $rs = enviarPost('http://localhost/apiPokemon/act/mis_pokemones.php', ['token'=>$usuario->token]);
+
+$pokemones = $rs->datos;
+
+echo "<ol>";
+
+foreach($pokemones as $pokemon) {
+    echo <<<POKEMON
+    <li>
+        <h4>{$pokemon->nombre} {$pokemon->tipo}</h4>
+    </li>
+POKEMON;
+
+}
+
+echo "</ol>";
+?>
